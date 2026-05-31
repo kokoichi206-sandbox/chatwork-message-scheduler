@@ -2,6 +2,7 @@
   "name": "chatwork-message-scheduler",
   "version": "0.0.1",
   "description": "Chatwork のメッセージを予約送信する Chrome 拡張 (Manifest V3)",
+  "license": "MIT",
   "type": "module",
   "scripts": {
     "dev": "vite",
