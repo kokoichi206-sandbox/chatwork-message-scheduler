@@ -1,10 +1,13 @@
 # Chatwork Message Scheduler
 
-[日本語版 README はこちら](./README.ja.md)
+_[English](./README.md) | [日本語](./README.ja.md)_
 
-A Chrome extension that schedules Chatwork messages to be sent automatically at a chosen date and time.
+> A Chrome extension that schedules Chatwork messages and sends them automatically at a date
+> and time you choose. Set it once from the side panel and forget it.
 
-![demo](./docs/demo.png)
+<!-- デモ GIF をここに置きます: docs/demo.gif -->
+
+![demo](docs/demo.gif)
 
 ## Features
 
@@ -13,31 +16,38 @@ A Chrome extension that schedules Chatwork messages to be sent automatically at 
 - View, edit, delete, and send-now your scheduled messages
 - Reservations persist across browser and PC restarts
 
-## Installation
+## Setup
 
-1. Clone this repository
-2. Run `pnpm install && pnpm build`
-3. Open `chrome://extensions`
-4. Enable **Developer mode**
-5. Click **Load unpacked** and select the `dist` directory
+```sh
+pnpm install
+pnpm build
+```
 
-## Usage
+Then open `chrome://extensions`, turn on **Developer mode**, click **Load unpacked**, and
+select the `dist` folder.
 
-1. Open the side panel from the extension icon
-2. Issue a [Chatwork API token](https://www.chatwork.com/service/packages/chatwork/subpackages/api/token.php) and save it in the panel
-3. Choose the target room, date/time, and message body, then schedule it
-4. The message is sent automatically at the scheduled time; check its status in the list
+## How to use
+
+1. Open the side panel from the extension icon.
+2. Issue a [Chatwork API token](https://www.chatwork.com/service/packages/chatwork/subpackages/api/token.php) and save it in the panel.
+3. Choose the target room, date/time, and message body, then schedule it.
+4. The message is sent automatically at the scheduled time. Check its status in the list.
+
+<!-- サイドパネルのスクリーンショットをここに: docs/sidepanel.png -->
+
+![side panel](docs/sidepanel.png)
 
 ## Notes
 
-- Messages are sent only while Chrome is running. A reservation whose time passes while Chrome is closed is sent the next time Chrome starts.
+- Messages are sent only while Chrome is running. A reservation whose time passes while Chrome
+  is closed is sent the next time Chrome starts.
 - The scheduled time is interpreted in your device's local timezone.
 - A Chatwork API token is required.
 
-## Development
+## For developers
 
 See [CLAUDE.md](./CLAUDE.md).
 
 ## License
 
-[MIT](./LICENSE)
+[MIT](./LICENSE) © 2026 kokoichi206

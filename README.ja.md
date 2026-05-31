@@ -1,10 +1,13 @@
 # Chatwork Message Scheduler
 
-[English README here](./README.md)
+_[English](./README.md) | [日本語](./README.ja.md)_
 
-Chatwork のメッセージを指定した日時に自動送信できる Chrome 拡張機能です。
+> Chatwork のメッセージを、指定した日時に自動送信する Chrome 拡張機能。サイドパネルから
+> 予約しておけば、その時刻に自動で送られます。
 
-![demo](./docs/demo.png)
+<!-- デモ GIF をここに置きます: docs/demo.gif -->
+
+![demo](docs/demo.gif)
 
 ## 機能
 
@@ -13,20 +16,25 @@ Chatwork のメッセージを指定した日時に自動送信できる Chrome 
 - 予約の一覧表示・編集・削除・今すぐ送信
 - ブラウザや PC を再起動しても予約は保持
 
-## インストール
+## 導入
 
-1. このリポジトリを clone
-2. `pnpm install && pnpm build` を実行
-3. `chrome://extensions` を開く
-4. **デベロッパーモード**を有効化
-5. **パッケージ化されていない拡張機能を読み込む**で `dist` ディレクトリを選択
+```sh
+pnpm install
+pnpm build
+```
+
+`chrome://extensions` を開き、**デベロッパーモード**を ON →「**パッケージ化されていない拡張機能を読み込む**」→ `dist` フォルダを選択。
 
 ## 使い方
 
-1. 拡張機能アイコンからサイドパネルを開く
-2. [Chatwork の API トークン](https://www.chatwork.com/service/packages/chatwork/subpackages/api/token.php) を発行し、サイドパネルに設定
-3. 送信先ルーム・日時・本文を指定して予約
-4. 指定時刻に自動送信。予約状況はサイドパネルの一覧で確認できる
+1. 拡張機能アイコンからサイドパネルを開く。
+2. [Chatwork の API トークン](https://www.chatwork.com/service/packages/chatwork/subpackages/api/token.php) を発行し、サイドパネルに設定。
+3. 送信先ルーム・日時・本文を指定して予約。
+4. 指定時刻に自動送信。状態はサイドパネルの一覧で確認できる。
+
+<!-- サイドパネルのスクリーンショットをここに: docs/sidepanel.png -->
+
+![side panel](docs/sidepanel.png)
 
 ## 注意
 
@@ -34,10 +42,10 @@ Chatwork のメッセージを指定した日時に自動送信できる Chrome 
 - 送信日時はお使いの端末のタイムゾーンで解釈されます。
 - 利用には Chatwork の API トークンが必要です。
 
-## 開発
+## 開発者向け
 
 [CLAUDE.md](./CLAUDE.md) を参照してください。
 
 ## ライセンス
 
-[MIT](./LICENSE)
+[MIT](./LICENSE) © 2026 kokoichi206
