@@ -30,6 +30,7 @@ const submitBtn = $<HTMLButtonElement>('#submit')
 const cancelEditBtn = $<HTMLButtonElement>('#cancelEdit')
 const formStatus = $<HTMLParagraphElement>('#formStatus')
 const listEl = $<HTMLDivElement>('#list')
+const listCountEl = $<HTMLSpanElement>('#listCount')
 
 // 編集中の予約 id（null なら新規作成モード）
 let editingId: string | null = null
@@ -88,7 +89,7 @@ const populateRooms = (rooms: ChatworkRoom[]): void => {
   roomSelect.replaceChildren()
   const placeholder = document.createElement('option')
   placeholder.value = ''
-  placeholder.textContent = '-- ルームを選択 --'
+  placeholder.textContent = 'ルームを選択'
   roomSelect.appendChild(placeholder)
   for (const room of rooms) {
     const option = document.createElement('option')
@@ -218,7 +219,7 @@ const startEdit = (reservation: Reservation): void => {
 
 const buildItem = (reservation: Reservation): HTMLDivElement => {
   const item = document.createElement('div')
-  item.className = 'item'
+  item.className = `item ${reservation.status}`
 
   const head = document.createElement('div')
   head.className = 'item-head'
@@ -252,6 +253,7 @@ const buildItem = (reservation: Reservation): HTMLDivElement => {
 
   if (reservation.status === 'pending') {
     const editBtn = document.createElement('button')
+    editBtn.className = 'btn btn-ghost btn-sm'
     editBtn.textContent = '編集'
     editBtn.addEventListener('click', () => startEdit(reservation))
     actions.appendChild(editBtn)
@@ -259,6 +261,7 @@ const buildItem = (reservation: Reservation): HTMLDivElement => {
 
   if (reservation.status !== 'sending') {
     const sendNowBtn = document.createElement('button')
+    sendNowBtn.className = 'btn btn-secondary btn-sm'
     sendNowBtn.textContent = '今すぐ送信'
     sendNowBtn.addEventListener('click', () => {
       void send({
@@ -270,6 +273,7 @@ const buildItem = (reservation: Reservation): HTMLDivElement => {
   }
 
   const deleteBtn = document.createElement('button')
+  deleteBtn.className = 'btn btn-danger btn-sm'
   deleteBtn.textContent = '削除'
   deleteBtn.addEventListener('click', () => {
     void send({ type: 'reservation/delete', payload: { id: reservation.id } })
@@ -284,13 +288,15 @@ const buildItem = (reservation: Reservation): HTMLDivElement => {
 const renderList = async (): Promise<void> => {
   const raw = await chrome.storage.local.get('reservations')
   const reservations = (raw.reservations as Record<string, Reservation>) ?? {}
+  // 新しい順（送信日時の降順）
   const sorted = Object.values(reservations).sort(
-    (a, b) => Date.parse(a.scheduledAt) - Date.parse(b.scheduledAt),
+    (a, b) => Date.parse(b.scheduledAt) - Date.parse(a.scheduledAt),
   )
+  listCountEl.textContent = sorted.length ? `(${sorted.length})` : ''
   listEl.replaceChildren()
   if (sorted.length === 0) {
     const empty = document.createElement('p')
-    empty.className = 'status'
+    empty.className = 'empty'
     empty.textContent = '予約はまだありません'
     listEl.appendChild(empty)
     return
