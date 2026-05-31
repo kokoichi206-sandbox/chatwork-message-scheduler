@@ -33,10 +33,6 @@ select the `dist` folder.
 3. Choose the target room, date/time, and message body, then schedule it.
 4. The message is sent automatically at the scheduled time. Check its status in the list.
 
-<!-- サイドパネルのスクリーンショットをここに: docs/sidepanel.png -->
-
-![side panel](docs/sidepanel.png)
-
 ## Notes
 
 - Messages are sent only while Chrome is running. A reservation whose time passes while Chrome
