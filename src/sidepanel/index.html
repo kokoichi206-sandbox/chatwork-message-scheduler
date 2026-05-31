@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chatwork Message Scheduler</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <main id="app">
+      <section class="card">
+        <h2>APIトークン</h2>
+        <div class="row">
+          <input
+            id="token"
+            type="password"
+            placeholder="Chatwork API トークン"
+          />
+          <button id="saveToken">保存して確認</button>
+        </div>
+        <p id="authStatus" class="status"></p>
+      </section>
+
+      <section class="card">
+        <h2>送信先ルーム</h2>
+        <select id="roomSelect">
+          <option value="">-- ルームを選択 --</option>
+        </select>
+        <div class="row">
+          <button id="loadRooms">一覧を取得</button>
+          <button id="currentRoom">今開いているルーム</button>
+        </div>
+        <p id="roomStatus" class="status"></p>
+      </section>
+
+      <section class="card">
+        <h2 id="formTitle">新規予約</h2>
+        <label>
+          送信日時
+          <input id="scheduledAt" type="datetime-local" />
+        </label>
+        <label>
+          本文
+          <textarea
+            id="body"
+            rows="4"
+            placeholder="メッセージ本文(Chatwork記法可)"
+          ></textarea>
+        </label>
+        <div class="row">
+          <button id="submit">予約する</button>
+          <button id="cancelEdit" class="hidden">キャンセル</button>
+        </div>
+        <p id="formStatus" class="status"></p>
+      </section>
+
+      <section class="card">
+        <h2>予約一覧</h2>
+        <div id="list"></div>
+      </section>
+    </main>
+    <script type="module" src="./main.ts"></script>
+  </body>
+</html>
