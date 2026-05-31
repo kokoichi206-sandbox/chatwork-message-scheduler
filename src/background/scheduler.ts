@@ -45,13 +45,6 @@ const sendClaimed = async (
 ): Promise<void> => {
   inFlight.add(reservation.id)
   try {
-    // 送信方式は明示分岐。Phase 1 は 'api' のみ。'dom' は黙って代替せず失敗させる
-    if (settings.sendMethod !== 'api') {
-      const reason = `未対応の送信方式です: ${settings.sendMethod}`
-      await store.markFailed(reservation.id, reason)
-      notifyFailure(reservation, reason)
-      return
-    }
     if (!settings.apiToken) {
       const reason = 'APIトークンが未設定です'
       await store.markFailed(reservation.id, reason)

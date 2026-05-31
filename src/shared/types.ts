@@ -1,7 +1,3 @@
-// 送信方式の契約。Phase 1 の実装は 'api' のみ対応し、'dom' を受けたら明示的にエラーにする
-// （契約は安定させ、実装層を後から拡張する方針）
-type SendMethod = 'api' | 'dom'
-
 // 状態遷移: pending -> sending -> sent / failed
 // sending は claim 済みの一時状態。二重送信防止(mutex)とタイムアウト復旧のために存在する
 type ReservationStatus = 'pending' | 'sending' | 'sent' | 'failed'
@@ -28,7 +24,6 @@ type Reservation = {
 // アプリ設定。chrome.storage.local に保存
 type Settings = {
   apiToken: string | null // Chatwork API トークン。ユーザーが入力。null = 未設定
-  sendMethod: SendMethod // 既定 'api'
   defaultSelfUnread: boolean // 送信時に自分を未読にするか(API の self_unread)
 }
 
@@ -47,7 +42,6 @@ type ChatworkRoom = {
 }
 
 export type {
-  SendMethod,
   ReservationStatus,
   Reservation,
   Settings,

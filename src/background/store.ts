@@ -4,7 +4,6 @@ import { withLock } from './mutex'
 
 const DEFAULT_SETTINGS: Settings = {
   apiToken: null,
-  sendMethod: 'api',
   defaultSelfUnread: false,
 }
 
