@@ -1,123 +1,330 @@
 :root {
-  font-family: system-ui, sans-serif;
+  --bg: #f4f5f7;
+  --surface: #ffffff;
+  --border: #e4e7ec;
+  --border-strong: #d0d5dd;
+  --text: #1f2937;
+  --text-muted: #667085;
+  --text-subtle: #98a2b3;
+  --primary: #2563eb;
+  --primary-hover: #1d4ed8;
+  --primary-weak: #eff4ff;
+  --danger: #d92d20;
+  --danger-weak: #fef3f2;
+  --green: #067647;
+  --green-weak: #ecfdf3;
+  --amber: #b54708;
+  --amber-weak: #fffaeb;
+  --radius: 10px;
+  --radius-sm: 8px;
+  --shadow: 0 1px 2px rgba(16, 24, 40, 0.04), 0 1px 3px rgba(16, 24, 40, 0.06);
+
+  font-family:
+    system-ui,
+    -apple-system,
+    'Hiragino Kaku Gothic ProN',
+    'Noto Sans JP',
+    sans-serif;
   font-size: 13px;
+  color: var(--text);
+  line-height: 1.5;
 }
+
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
-  padding: 8px;
-  background: #f5f6f7;
-  color: #1f2329;
+  padding: 12px;
+  background: var(--bg);
 }
-.card {
-  background: #fff;
-  border: 1px solid #e3e6e8;
-  border-radius: 6px;
-  padding: 10px;
-  margin-bottom: 8px;
-}
-h2 {
-  font-size: 13px;
-  margin: 0 0 8px;
-}
-.row {
+
+#app {
   display: flex;
-  gap: 6px;
-  margin-bottom: 6px;
+  flex-direction: column;
+  gap: 12px;
 }
-label {
+
+/* --- カード --- */
+.card {
+  padding: 16px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.card-title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0 0 12px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.count {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-subtle);
+}
+
+/* --- フォーム --- */
+.field {
+  margin-bottom: 12px;
+}
+.field:last-of-type {
+  margin-bottom: 0;
+}
+
+.label {
   display: block;
   margin-bottom: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-muted);
 }
+
 input,
 textarea,
 select {
   width: 100%;
-  box-sizing: border-box;
-  padding: 5px 6px;
-  border: 1px solid #c4c9ce;
-  border-radius: 4px;
+  padding: 8px 10px;
   font: inherit;
+  color: var(--text);
+  background: var(--surface);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  transition:
+    border-color 0.15s,
+    box-shadow 0.15s;
 }
-button {
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--text-subtle);
+}
+
+textarea {
+  min-height: 76px;
+  resize: vertical;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px var(--primary-weak);
+}
+
+/* --- レイアウト補助 --- */
+.input-row {
+  display: flex;
+  gap: 8px;
+}
+.input-row input {
+  flex: 1;
+  min-width: 0;
+}
+
+.btn-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+/* --- ボタン --- */
+.btn {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   white-space: nowrap;
-  padding: 5px 10px;
-  border: 1px solid #c4c9ce;
-  border-radius: 4px;
-  background: #fff;
+  padding: 8px 14px;
+  font: inherit;
+  font-weight: 500;
+  line-height: 1.2;
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
   cursor: pointer;
+  transition:
+    background 0.15s,
+    border-color 0.15s,
+    color 0.15s;
 }
-button:hover {
-  background: #f0f2f4;
+.btn:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
 }
-.status {
-  margin: 4px 0 0;
-  min-height: 1em;
+
+.btn-primary {
+  background: var(--primary);
+  color: #fff;
+}
+.btn-primary:hover {
+  background: var(--primary-hover);
+}
+
+.btn-secondary {
+  background: var(--surface);
+  border-color: var(--border-strong);
+  color: var(--text);
+}
+.btn-secondary:hover {
+  background: var(--bg);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--text-muted);
+}
+.btn-ghost:hover {
+  background: var(--bg);
+}
+
+.btn-danger {
+  background: transparent;
+  color: var(--danger);
+}
+.btn-danger:hover {
+  background: var(--danger-weak);
+}
+
+/* トークン行の保存ボタンは内容幅 */
+.input-row .btn {
+  flex: 0 0 auto;
+}
+
+/* 一覧内の小さなアクションボタン */
+.btn-sm {
+  flex: 0 0 auto;
+  padding: 5px 10px;
   font-size: 12px;
-  color: #6b7177;
 }
-.status.error {
-  color: #d93025;
+
+/* --- ステータス文言 --- */
+.status {
+  margin: 8px 0 0;
+  font-size: 12px;
+  color: var(--text-muted);
 }
-.status.ok {
-  color: #1e7e34;
-}
-.hidden {
+.status:empty {
   display: none;
 }
+.status.ok {
+  color: var(--green);
+}
+.status.error {
+  color: var(--danger);
+}
+
+/* --- 予約一覧 --- */
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.empty {
+  margin: 0;
+  padding: 24px 12px;
+  text-align: center;
+  font-size: 12px;
+  color: var(--text-subtle);
+  background: var(--bg);
+  border-radius: var(--radius-sm);
+}
+
 .item {
-  border-top: 1px solid #eceeef;
-  padding: 8px 0;
+  padding: 12px;
+  background: var(--bg);
+  border-radius: var(--radius-sm);
+  border-left: 3px solid var(--border-strong);
 }
-.item:first-child {
-  border-top: none;
+.item.pending {
+  border-left-color: var(--primary);
 }
+.item.sending {
+  border-left-color: var(--amber);
+}
+.item.sent {
+  border-left-color: var(--green);
+}
+.item.failed {
+  border-left-color: var(--danger);
+}
+
 .item-head {
   display: flex;
-  justify-content: space-between;
-  gap: 6px;
   align-items: center;
+  justify-content: space-between;
+  gap: 8px;
 }
 .item-room {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
   font-weight: 600;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
+
 .item-time {
-  color: #6b7177;
+  margin-top: 2px;
   font-size: 12px;
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
 }
+
 .item-body {
+  margin: 8px 0 0;
   white-space: pre-wrap;
   word-break: break-word;
-  margin: 4px 0;
+  color: var(--text);
 }
-.badge {
-  font-size: 11px;
-  padding: 1px 6px;
-  border-radius: 10px;
-  white-space: nowrap;
-}
-.badge.pending {
-  background: #e8f0fe;
-  color: #1a73e8;
-}
-.badge.sending {
-  background: #fff4e5;
-  color: #b06000;
-}
-.badge.sent {
-  background: #e6f4ea;
-  color: #1e7e34;
-}
-.badge.failed {
-  background: #fce8e6;
-  color: #d93025;
-}
+
 .item-error {
-  color: #d93025;
+  margin-top: 6px;
   font-size: 12px;
-  margin: 2px 0;
+  color: var(--danger);
 }
+
 .item-actions {
   display: flex;
   gap: 6px;
-  margin-top: 4px;
+  margin-top: 10px;
+}
+
+/* --- バッジ --- */
+.badge {
+  flex: 0 0 auto;
+  padding: 2px 8px;
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+  border-radius: 999px;
+}
+.badge.pending {
+  background: var(--primary-weak);
+  color: var(--primary);
+}
+.badge.sending {
+  background: var(--amber-weak);
+  color: var(--amber);
+}
+.badge.sent {
+  background: var(--green-weak);
+  color: var(--green);
+}
+.badge.failed {
+  background: var(--danger-weak);
+  color: var(--danger);
+}
+
+.hidden {
+  display: none;
 }

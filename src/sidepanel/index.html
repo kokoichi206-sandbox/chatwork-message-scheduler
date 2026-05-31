@@ -9,54 +9,61 @@
   <body>
     <main id="app">
       <section class="card">
-        <h2>APIトークン</h2>
-        <div class="row">
+        <h2 class="card-title">API トークン</h2>
+        <div class="input-row">
           <input
             id="token"
             type="password"
             placeholder="Chatwork API トークン"
+            aria-label="API トークン"
           />
-          <button id="saveToken">保存して確認</button>
+          <button id="saveToken" class="btn btn-primary">保存して確認</button>
         </div>
         <p id="authStatus" class="status"></p>
       </section>
 
       <section class="card">
-        <h2>送信先ルーム</h2>
-        <select id="roomSelect">
-          <option value="">-- ルームを選択 --</option>
+        <h2 class="card-title">送信先ルーム</h2>
+        <select id="roomSelect" aria-label="送信先ルーム">
+          <option value="">ルームを選択</option>
         </select>
-        <div class="row">
-          <button id="loadRooms">一覧を取得</button>
-          <button id="currentRoom">今開いているルーム</button>
+        <div class="btn-group">
+          <button id="loadRooms" class="btn btn-secondary">一覧を取得</button>
+          <button id="currentRoom" class="btn btn-secondary">
+            今開いているルーム
+          </button>
         </div>
         <p id="roomStatus" class="status"></p>
       </section>
 
       <section class="card">
-        <h2 id="formTitle">新規予約</h2>
-        <label>
-          送信日時
+        <h2 class="card-title" id="formTitle">新規予約</h2>
+        <div class="field">
+          <label class="label" for="scheduledAt">送信日時</label>
           <input id="scheduledAt" type="datetime-local" />
-        </label>
-        <label>
-          本文
+        </div>
+        <div class="field">
+          <label class="label" for="body">本文</label>
           <textarea
             id="body"
             rows="4"
-            placeholder="メッセージ本文(Chatwork記法可)"
+            placeholder="メッセージ本文（Chatwork 記法可）"
           ></textarea>
-        </label>
-        <div class="row">
-          <button id="submit">予約する</button>
-          <button id="cancelEdit" class="hidden">キャンセル</button>
+        </div>
+        <div class="btn-group">
+          <button id="submit" class="btn btn-primary">予約する</button>
+          <button id="cancelEdit" class="btn btn-ghost hidden">
+            キャンセル
+          </button>
         </div>
         <p id="formStatus" class="status"></p>
       </section>
 
       <section class="card">
-        <h2>予約一覧</h2>
-        <div id="list"></div>
+        <h2 class="card-title">
+          予約一覧 <span id="listCount" class="count"></span>
+        </h2>
+        <div id="list" class="list"></div>
       </section>
     </main>
     <script type="module" src="./main.ts"></script>
